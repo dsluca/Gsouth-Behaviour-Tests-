@@ -1,0 +1,30 @@
+<!-- Dylan Lucas me@dylanlucas.net 
+		build file for GSouth Behaviour Tests
+		-->
+
+<project name="gsouth_bdd" default="compile" basedir=".">
+
+	<target name="init" description="initialiser target">
+		<property name="src.dir" value="${basedir}/src" />				
+		<property name="lib.dir" value="${basedir}/lib" />
+		<property name="build.dir" value="${basedir}/build" />
+    	<property name="classes.dir" value="${output.dir}/classes" />
+		<path id="lib.classpath">			
+			<pathelement location="${lib.dir}" />
+			<pathelement location="${classes.dir}" />
+		</path>
+	</target>
+
+	<target name="compile" description="Compile the tests/behaviors" depends="init">
+		<javac destdir="${classes.dir}" srcdir="${src.dir}" >
+			<classpath refid="lib.classpath" />
+		</javac>
+	</target>
+
+	<target name="run_specs" description="run the behaviours/specs" depends="compile">
+		<java classname="spec.Main">
+			<classpath refid="lib.classpath" />
+		</java>
+	</target>
+</project>
+
